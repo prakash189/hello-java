@@ -71,7 +71,7 @@
   
 
   - name: copy war file
-    copy: src=./target/jb-hello-world-maven-0.1.0.jar dest=/opt/tomcatwebapps/
+    copy: src=./target/jb-hello-world-maven-0.1.0.jar dest=/opt/tomcat/webapps
 
   - name: Start and enable Tomcat service
     systemd:
