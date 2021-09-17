@@ -64,14 +64,14 @@
       daemon_reload: true
   - name: Create  sample directory
     file: 
-      path: "/opt/tomcat/webapps/samples"
+      path: "/opt/tomcat/webapps"
       state: directory
       mode: 0777
     become: true
   
 
   - name: copy war file
-    copy: src=./target/jb-hello-world-maven-0.1.0.jar dest=/opt/tomcat/webapps
+    copy: src=./target/LoginWebApp-1.war dest=/opt/tomcat/webapps
 
   - name: Start and enable Tomcat service
     systemd:
