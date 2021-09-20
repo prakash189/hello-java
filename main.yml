@@ -7,9 +7,9 @@
 
   tasks:
     - name: Copy to s3
-      s3:
+      amazon.aws.aws_s3:
           bucket: "publish-artifacts-java"
           object: "/LoginWebApp-1.war"
-          dest: "/target/LoginWebApp-1.war"
+          src: "/target/LoginWebApp-1.war"
           mode: put
           overwrite: no
