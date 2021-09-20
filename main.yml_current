@@ -6,6 +6,11 @@
   remote_user: ubuntu
 
   tasks:
+  - name: Update and upgrade apt packages
+    apt:
+      upgrade: yes
+      update_cache: yes
+      cache_valid_time: 86400 #One day
 
   - name: install JDK 11
     apt:
@@ -58,27 +63,16 @@
       enabled: true
       daemon_reload: true
   - name: Create  sample directory
-    file:
+    file: 
       path: "/opt/tomcat/webapps"
       state: directory
       mode: 0777
     become: true
+  
 
-  - name: upload to s3
-    aws_s3:
-      bucket: "publish-artifacts-java"
-      object: "/target/LoginWebApp-1.war"
-      src: "/var/lib/jenkins/workspace/java-application-pipeline/target/LoginWebApp-1.war"
-      mode: put
+  - name: copy war file
+    copy: src=./target/LoginWebApp-1.war dest=/opt/tomcat/webapps
 
-
-  - name: download to tomcat server
-    aws_s3:
-      bucket: "publish-artifacts-java"
-      object: "/target/LoginWebApp-1.war"
-      dest: "/opt/tomcat/webapps/LoginWebApp-1.war"
-      mode: get
-      
   - name: Start and enable Tomcat service
     systemd:
       name: tomcat
