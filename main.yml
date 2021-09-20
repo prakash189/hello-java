@@ -72,7 +72,12 @@
 
 
   - name: Copy file to S3 bucket
-    s3: bucket=publish-artifacts-java object=/LoginWebApp-1.war src=./target/LoginWebApp-1.war mode=put
+    amazon.aws.aws_s3:
+      bucket: publish-artifacts-java
+      object: /LoginWebApp-1.war
+      src: ./target/LoginWebApp-1.war
+      mode: put
+
  # - name: copy war file
 #    copy: src=./target/LoginWebApp-1.war dest=/opt/tomcat/webapps
 
