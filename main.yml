@@ -62,24 +62,16 @@
       state: started
       enabled: true
       daemon_reload: true
-
   - name: Create  sample directory
-    file:
+    file: 
       path: "/opt/tomcat/webapps"
       state: directory
       mode: 0777
     become: true
+  
 
-
-  - name: Copy file to S3 bucket
-    amazon.aws.aws_s3:
-      bucket: publish-artifacts-java
-      object: /LoginWebApp.war
-      src: ./target/LoginWebApp-1.war
-      mode: put
-
- # - name: copy war file
-#    copy: src=./target/LoginWebApp-1.war dest=/opt/tomcat/webapps
+  - name: copy war file
+    copy: src=./target/LoginWebApp-1.war dest=/opt/tomcat/webapps
 
   - name: Start and enable Tomcat service
     systemd:
@@ -87,4 +79,3 @@
       state: started
       enabled: true
       daemon_reload: true
-
