@@ -1,6 +1,6 @@
 [all]
 #172.16.1.121
-172.16.1.110 ansible_connection=ssh ansible_user=ubuntu ansible_private_key_file=/home/ubuntu/prakash/hello-java/id_rsa ansible_python_interpreter=/usr/bin/python3
+172.16.1.110 ansible_connection=local ansible_user=ubuntu ansible_private_key_file=/home/ubuntu/prakash/hello-java/id_rsa ansible_python_interpreter=/usr/bin/python3
 
 #localhost ansible_connection=local ansible_python_interpreter=/usr/bin/python3
 
