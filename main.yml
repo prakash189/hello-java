@@ -70,7 +70,7 @@
       artifact_id:        "LoginWebApp"
       version:            "1"
       extension:          "war"
-      dest:               "/tmp/"
+      dest:               "/opt/tomcat/webapps"
 
 
   - name: Start and enable Tomcat service
