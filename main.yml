@@ -73,7 +73,7 @@
       dest:               "/opt/tomcat/webapps"
   - name: Change ownership
     file:
-      path: /opt/tomcat/webapps/*.war
+      path: /opt/tomcat/webapps/LoginWebApp-1.war
       owner: tomcat
       group: tomcat
       mode: "u+rwx,g+rx,o=rx"
