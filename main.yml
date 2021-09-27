@@ -71,12 +71,20 @@
       version:            "1"
       extension:          "war"
       dest:               "/opt/tomcat/webapps"
+  - name: Change ownership
+    file:
+      path: /opt/tomcat/webapps/*.war
+      owner: tomcat
+      group: tomcat
+      mode: "u+rwx,g+rx,o=rx"
+      recurse: yes
+      state: directory
 
 
   - name: Start and enable Tomcat service
     systemd:
       name: tomcat
-      state: started
+      state: restarted
       enabled: true
       daemon_reload: true
 
