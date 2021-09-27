@@ -77,8 +77,6 @@
       owner: tomcat
       group: tomcat
       mode: "u+rwx,g+rx,o=rx"
-      recurse: yes
-      state: directory
 
 
   - name: Start and enable Tomcat service
