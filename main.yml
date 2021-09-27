@@ -64,19 +64,6 @@
       mode: 0777
     become: true
 
-  - name: Push war to nexus
-    uri:
-      url: "http://18.142.139.8:8081/repository/java-apps-artifacts/"
-      method: PUT
-      src: "target/LoginWebApp-1.war"
-      user: "admin"
-      password: "admin123"
-      force_basic_auth: yes
-      #headers:
-      #  Content-Type: application/octet-stream  # To avoid automatic 'application/x-www-form-urlencoded'
-      status_code:
-      - 201
-
   - name: Start and enable Tomcat service
     systemd:
       name: tomcat
