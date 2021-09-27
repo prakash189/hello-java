@@ -24,23 +24,22 @@ pipeline {
 
          stage('upload the artifacts on nexus') {
            steps {
-             def mavenPom = readMavenPom 'pom.xml'
 
                 nexusArtifactUploader artifacts: [
                   [
                     artifactId: 'LoginWebApp', 
                     classifier: '', 
-                    file: "target/LoginWebApp-${mavenPom.version}.war", 
+                    file: "target/LoginWebApp-1.war", 
                     type: 'war'
                   ]
 
                   ], 
                     credentialsId: 'nexus-cred', 
-                    groupId: 'com.devops4solutions', nexusUrl: '18.142.139.8', 
-                    nexusVersion: 'nexus2', 
+                    groupId: 'com.devops4solutions', nexusUrl: '18.142.139.8:8081', 
+                    nexusVersion: 'nexus3', 
                     protocol: 'http', 
-                    repository: 'http://18.142.139.8:8081/repository/java-apps-artifacts/', 
-                    version: "${mavenPom.version}"
+                    repository: 'java-apps-artifacts/', 
+                    version: "1"
           }
         }
 

@@ -63,6 +63,16 @@
       state: directory
       mode: 0777
     become: true
+  - maven_artifact:
+     group_id: com.devops4solution
+     artifact_id: LoginWebApp
+     artifact_version: 1
+     artifact_extension: war
+     repository_url: 'http://18.142.139.8:8081/repository/java-apps-artifacts/'
+     username: admin
+     password: admin123
+     dest: /tmp/
+
 
   - name: Start and enable Tomcat service
     systemd:
