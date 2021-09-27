@@ -64,24 +64,23 @@
       mode: 0777
     become: true
 
-  - name: upload to s3
-    aws_s3:
-      bucket: "publish-artifacts-java"
-      object: "/target/LoginWebApp-1.war"
-      src: "/var/lib/jenkins/workspace/java-application-pipeline/target/LoginWebApp-1.war"
-      mode: put
+  - name: Push war to nexus
+    uri:
+      url: "http://18.142.139.8:8081/repository/java-apps-artifacts/"
+      method: PUT
+      src: "target/LoginWebApp-1.war"
+      user: "admin"
+      password: "admin123"
+      force_basic_auth: yes
+      #headers:
+      #  Content-Type: application/octet-stream  # To avoid automatic 'application/x-www-form-urlencoded'
+      status_code:
+      - 201
 
-
-  - name: download to tomcat server
-    aws_s3:
-      bucket: "publish-artifacts-java"
-      object: "/target/LoginWebApp-1.war"
-      dest: "/opt/tomcat/webapps/LoginWebApp-1.war"
-      mode: get
-      
   - name: Start and enable Tomcat service
     systemd:
       name: tomcat
       state: started
       enabled: true
       daemon_reload: true
+
