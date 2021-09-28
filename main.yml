@@ -65,7 +65,7 @@
     become: true
   - name:                 Download artifact from Maven
     maven_artifact:
-      repository_url:     "http://18.140.248.102:8081/repository/java-apps-artifacts/"
+      repository_url:     "http://192.168.252.128:8081/repository/java-artifacts/"
       group_id:           "com.devops4solutions"
       artifact_id:        "LoginWebApp"
       version:            "1"
