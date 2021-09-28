@@ -35,7 +35,7 @@ pipeline {
 
                   ], 
                     credentialsId: 'nexus-cred', 
-                    groupId: 'com.devops4solutions', nexusUrl: '18.142.139.8:8081', 
+                    groupId: 'com.devops4solutions', nexusUrl: '18.140.248.102:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
                     repository: 'java-apps-artifacts/', 
