@@ -30,9 +30,8 @@
       state: present
 
   - name: install lxml
-    pip3:
-      name: lxml
-      state: present  
+    pip:
+      name: lxml  
 
   - name: add tomcat group
     group:
