@@ -18,7 +18,7 @@
     apt:
       name: ansible
       state: present
-      
+
   - name: install python3
     apt:
       name: python3

@@ -38,7 +38,7 @@ pipeline {
                     groupId: 'com.devops4solutions', nexusUrl: '18.140.130.19:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
-                    repository: 'java-apps-artifacts/', 
+                    repository: 'java-artifacts/', 
                     version: "1"
           }
         }
