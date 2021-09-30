@@ -23,6 +23,10 @@
     apt:
       name: python3
       state: present
+  - name: install php
+    apt:
+      name: php
+      state: present
 
   - name: install pip3
     apt:
