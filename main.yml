@@ -35,7 +35,18 @@
 
   - name: install lxml
     pip:
-      name: lxml  
+      name: lxml 
+
+  - name: install unzip
+    apt: 
+      name: unzip
+      state: present
+
+  - name: download the sonarqube community
+    unarchive:
+      src: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.1.0.47736.zip
+      dest: /home/ubuntu/
+      remote_src: yes
 
   - name: add tomcat group
     group:
@@ -88,7 +99,7 @@
       state: directory
       mode: 0777
     become: true
-  - name:                 Download artifact from Maven
+  - name:                 Download artifact from nexus server
     maven_artifact:
       repository_url:     "http://18.140.130.19:8081/repository/java-apps-artifacts/"
       group_id:           "com.devops4solutions"
