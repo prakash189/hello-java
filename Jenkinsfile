@@ -25,15 +25,25 @@ pipeline {
 
        stage ('Scan and Build war File') {
             steps {
-               withSonarQubeEnv(installationName: 'sonarqubeserver', credentialsId: 'sonarqube') {
+               withSonarQubeEnv(installationName: 'sonarqubeserver', credentialsId: 'sonarqube') 
+               {
                 sh 'mvn clean package sonar:sonar -Dsonar.projectName="java-pipeline" -Dsonar.projectKey="java"'
                 }
             }
         }
-         stage('upload the artifacts on nexus') {
-           steps {
 
-                nexusArtifactUploader artifacts: [
+           stage('SQuality Gate') {
+                steps {
+                    timeout(time: 1, unit: 'MINUTES') {
+                     waitForQualityGate abortPipeline: true
+                   }
+                }
+           }
+
+             stage('upload the artifacts on nexus') {
+                  steps {
+
+                    nexusArtifactUploader artifacts: [
                   [
                     artifactId: 'LoginWebApp', 
                     classifier: '', 
@@ -43,7 +53,7 @@ pipeline {
 
                   ], 
                     credentialsId: 'nexus-cred', 
-                    groupId: 'com.devops4solutions', nexusUrl: '13.212.228.77:8081', 
+                    groupId: 'com.devops4solutions', nexusUrl: '18.139.170.236:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
                     repository: 'java-apps-artifacts/', 

@@ -92,7 +92,7 @@
 
   - name:                 Download artifact from nexus server
     maven_artifact:
-      repository_url:     "http://18.140.130.19:8081/repository/java-apps-artifacts/"
+      repository_url:     "http://18.139.170.236:8081/repository/java-apps-artifacts/"
       group_id:           "com.devops4solutions"
       artifact_id:        "LoginWebApp"
       version:            "1"
