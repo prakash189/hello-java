@@ -22,6 +22,14 @@ pipeline {
           }
         }
 
+
+       stage ('Scan and Build war File') {
+            steps {
+               withSonarQubeEnv(installationName: 'sonarqubeserver', credentialsId: 'sonarqube') {
+                sh 'mvn clean package sonar:sonar -Dsonar.projectName="java-pipeline" -Dsonar.projectKey="java"'
+                }
+            }
+        }
          stage('upload the artifacts on nexus') {
            steps {
 
@@ -35,7 +43,7 @@ pipeline {
 
                   ], 
                     credentialsId: 'nexus-cred', 
-                    groupId: 'com.devops4solutions', nexusUrl: '18.140.130.19:8081', 
+                    groupId: 'com.devops4solutions', nexusUrl: '13.212.228.77:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
                     repository: 'java-apps-artifacts/', 

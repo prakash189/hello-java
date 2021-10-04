@@ -6,99 +6,90 @@
   remote_user: ubuntu
 
   tasks:
-  - name: Update apt-get repo and cache
-    apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+  # - name: Update apt-get repo and cache
+  #   apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
       
-  - name: install JDK 11
-    apt:
-      name: openjdk-11-jdk
-      state: present    
+  # - name: install JDK 11
+  #   apt:
+  #     name: openjdk-11-jdk
+  #     state: present    
 
-  - name: install ansible
-    apt:
-      name: ansible
-      state: present
+  # - name: install ansible
+  #   apt:
+  #     name: ansible
+  #     state: present
 
-  - name: install python3
-    apt:
-      name: python3
-      state: present
-  - name: install php
-    apt:
-      name: php
-      state: present
+  # - name: install python3
+  #   apt:
+  #     name: python3
+  #     state: present
+  # - name: install php
+  #   apt:
+  #     name: php
+  #     state: present
 
-  - name: install pip3
-    apt:
-      name: python3-pip
-      state: present
+  # - name: install pip3
+  #   apt:
+  #     name: python3-pip
+  #     state: present
 
-  - name: install lxml
-    pip:
-      name: lxml 
+  # - name: install lxml
+  #   pip:
+  #     name: lxml 
 
-  - name: install unzip
-    apt: 
-      name: unzip
-      state: present
+  # - name: add tomcat group
+  #   group:
+  #     name: tomcat
 
-  - name: download the sonarqube community
-    unarchive:
-      src: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.1.0.47736.zip
-      dest: /home/ubuntu/
-      remote_src: yes
+  # - name: add tomcat user
+  #   user:
+  #     name: tomcat
+  #     group: tomcat
+  #     home: /user/share/tomcat
+  #     createhome: no
 
-  - name: add tomcat group
-    group:
-      name: tomcat
+  # - name: create /opt/tomcat directory
+  #   file:
+  #     path: /opt/tomcat
+  #     state: directory
+  #     mode: 0755
 
-  - name: add tomcat user
-    user:
-      name: tomcat
-      group: tomcat
-      home: /user/share/tomcat
-      createhome: no
+  # - name: download & unarchive
+  #   unarchive:
+  #     src: http://apache.cs.utah.edu/tomcat/tomcat-9/v9.0.53/bin/apache-tomcat-9.0.53.tar.gz
+  #     dest: /opt/tomcat
+  #     remote_src: yes
+  #     extra_opts: [--strip-components=1]
 
-  - name: create /opt/tomcat directory
-    file:
-      path: /opt/tomcat
-      state: directory
-      mode: 0755
+  # - name: Change ownership
+  #   file:
+  #     path: /opt/tomcat
+  #     owner: tomcat
+  #     group: tomcat
+  #     mode: "u+rwx,g+rx,o=rx"
+  #     recurse: yes
+  #     state: directory
 
-  - name: download & unarchive
-    unarchive:
-      src: http://apache.cs.utah.edu/tomcat/tomcat-9/v9.0.53/bin/apache-tomcat-9.0.53.tar.gz
-      dest: /opt/tomcat
-      remote_src: yes
-      extra_opts: [--strip-components=1]
+  # - name: Copy Tomcat service from local to remote
+  #   copy:
+  #      src: tomcat.service
+  #      dest: /etc/systemd/system/
+  #      mode: 0755
 
-  - name: Change ownership
-    file:
-      path: /opt/tomcat
-      owner: tomcat
-      group: tomcat
-      mode: "u+rwx,g+rx,o=rx"
-      recurse: yes
-      state: directory
+  # - name: Start and enable Tomcat service
+  #   systemd:
+  #     name: tomcat
+  #     state: started
+  #     enabled: true
+  #     daemon_reload: true
+      
+  # - name: Create  sample directory
+  #   file:
+  #     path: "/opt/tomcat/webapps"
+  #     state: directory
+  #     mode: 0777
+  #   become: true
 
-  - name: Copy Tomcat service from local to remote
-    copy:
-       src: tomcat.service
-       dest: /etc/systemd/system/
-       mode: 0755
-
-  - name: Start and enable Tomcat service
-    systemd:
-      name: tomcat
-      state: started
-      enabled: true
-      daemon_reload: true
-  - name: Create  sample directory
-    file:
-      path: "/opt/tomcat/webapps"
-      state: directory
-      mode: 0777
-    become: true
   - name:                 Download artifact from nexus server
     maven_artifact:
       repository_url:     "http://18.140.130.19:8081/repository/java-apps-artifacts/"
@@ -107,6 +98,7 @@
       version:            "1"
       extension:          "war"
       dest:               "/opt/tomcat/webapps"
+
   - name: Change ownership
     file:
       path: /opt/tomcat/webapps/LoginWebApp-1.war
