@@ -23,7 +23,7 @@ pipeline {
         }
 
 
-       stage ('Scan and Build war File') {
+       stage ('Scan File') {
             steps {
                withSonarQubeEnv(installationName: 'sonarqubeserver', credentialsId: 'sonarqube') 
                {
@@ -32,45 +32,45 @@ pipeline {
             }
         }
 
-          //  stage('SQuality Gate') {
-          //       steps {
-          //           timeout(time: 5, unit: 'MINUTES') {
-          //            waitForQualityGate abortPipeline: true
-          //          }
-          //       }
-          //  }
+           stage('SQuality Gate') {
+                steps {
+                    timeout(time: 60, unit: 'MINUTES') {
+                     waitForQualityGate abortPipeline: true
+                   }
+                }
+           }
 
-             stage('upload the artifacts on nexus') {
-                  steps {
+        //      stage('upload the artifacts on nexus') {
+        //           steps {
 
-                    nexusArtifactUploader artifacts: [
-                  [
-                    artifactId: 'LoginWebApp', 
-                    classifier: '', 
-                    file: "target/LoginWebApp-1.war", 
-                    type: 'war'
-                  ]
+        //             nexusArtifactUploader artifacts: [
+        //           [
+        //             artifactId: 'LoginWebApp', 
+        //             classifier: '', 
+        //             file: "target/LoginWebApp-1.war", 
+        //             type: 'war'
+        //           ]
 
-                  ], 
-                    credentialsId: 'nexus-cred', 
-                    groupId: 'com.devops4solutions', nexusUrl: '18.139.170.236:8081', 
-                    nexusVersion: 'nexus3', 
-                    protocol: 'http', 
-                    repository: 'java-apps-artifacts/', 
-                    version: "1"
-          }
-        }
+        //           ], 
+        //             credentialsId: 'nexus-cred', 
+        //             groupId: 'com.devops4solutions', nexusUrl: '18.139.170.236:8081', 
+        //             nexusVersion: 'nexus3', 
+        //             protocol: 'http', 
+        //             repository: 'java-apps-artifacts/', 
+        //             version: "1"
+        //   }
+        // }
 
 
-        stage('Ansible Deploy') {
+        // stage('Ansible Deploy') {
 
-            steps {
+        //     steps {
                 
-                sh "ansible-playbook main.yml -i inventories/prod/hosts --user ubuntu "
+        //         sh "ansible-playbook main.yml -i inventories/prod/hosts --user ubuntu "
         
             
-            }
-        }
+        //     }
+        // }
     }
 }
 
