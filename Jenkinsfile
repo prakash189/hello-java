@@ -4,8 +4,6 @@ pipeline {
     {
        maven "M3"
     }
-
-    stages {
       stage('checkout') {
           
 
@@ -87,5 +85,5 @@ pipeline {
         //     }
         // }
     }
-}
+
 
