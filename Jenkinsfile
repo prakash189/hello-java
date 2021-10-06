@@ -4,7 +4,9 @@ pipeline {
     {
        maven "M3"
     }
-      stage('checkout') {
+     stages {
+       
+        stage('checkout') {
           steps{
 
                 git branch: 'main', url: 'https://github.com/prakash189/hello-java.git'
@@ -72,6 +74,8 @@ pipeline {
             
         //     }
         // }
+        }
+    
     }
 
 
