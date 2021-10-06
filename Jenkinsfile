@@ -32,13 +32,28 @@ pipeline {
             }
         }
 
-           stage('SQuality Gate') {
-                steps {
-                    timeout(time: 60, unit: 'MINUTES') {
-                     waitForQualityGate abortPipeline: true
-                   }
-                }
-           }
+          stage("Check for Quality Gate")
+            {
+         
+                timeout(time: 5, unit: 'MINUTES') 
+                            {
+                                    qg = waitForQualityGate()
+                                    if (qg.status != 'OK') 
+                                    {
+                                        value = value+1  
+                                        error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                                    }
+                            }
+            }
+
+
+          //  stage('SQuality Gate') {
+          //       steps {
+          //           timeout(time: 60, unit: 'MINUTES') {
+          //            waitForQualityGate abortPipeline: true
+          //          }
+          //       }
+          //  }
 
         //      stage('upload the artifacts on nexus') {
         //           steps {
