@@ -7,7 +7,7 @@ pipeline {
 
     stages {
       stage('checkout') {
-           steps {
+           {
 
                 git branch: 'main', url: 'https://github.com/prakash189/hello-java.git'
 
@@ -15,7 +15,7 @@ pipeline {
         }
 
          stage('build code') {
-           steps {
+            {
 
                 sh 'mvn clean install'
           }
@@ -23,7 +23,7 @@ pipeline {
 
 
        stage ('Scan File') {
-            steps {
+             {
                withSonarQubeEnv(installationName: 'sonarqubeserver', credentialsId: 'sonarqube') 
                {
                 sh 'mvn clean package sonar:sonar -Dsonar.projectName="java-pipeline" -Dsonar.projectKey="java"'
@@ -34,7 +34,7 @@ pipeline {
 
         stage("Check for Quality Gate")
                {
-                 steps{
+               
                        timeout(time: 1, unit: 'MINUTES') 
                             {
                                    def qg = waitForQualityGate()
@@ -43,7 +43,7 @@ pipeline {
                                         error "Pipeline aborted due to quality gate failure: ${qg.status}"
                                     }
                             }
-                    }
+               
                   
                }
 
