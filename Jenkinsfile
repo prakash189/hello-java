@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    def value=0
     tools
     {
        maven "M3"
@@ -32,29 +31,14 @@ pipeline {
             }
         }
 
-        stage("Check for Quality Gate")
-            {
-              steps{
-                timeout(time: 5, unit: 'MINUTES') 
-                            {
-                                    qg = waitForQualityGate()
-                                    if (qg.status != 'OK') 
-                                    {
-                                        value = value+1  
-                                        error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                                    }
-                            }
+
+           stage('SQuality Gate') {
+                steps {
+                    timeout(time: 1, unit: 'MINUTES') {
+                     waitForQualityGate abortPipeline: true
+                   }
                 }
-            }
-
-
-          //  stage('SQuality Gate') {
-          //       steps {
-          //           timeout(time: 60, unit: 'MINUTES') {
-          //            waitForQualityGate abortPipeline: true
-          //          }
-          //       }
-          //  }
+           }
 
         //      stage('upload the artifacts on nexus') {
         //           steps {
