@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+    def value=0
     tools
     {
        maven "M3"
