@@ -7,28 +7,28 @@ pipeline {
 
     stages {
       stage('checkout') {
-          
+           {
 
                 git branch: 'main', url: 'https://github.com/prakash189/hello-java.git'
 
           }
-        
+        }
 
          stage('build code') {
-            
+            {
 
                 sh 'mvn clean install'
-          
+          }
         }
 
 
        stage ('Scan File') {
-            
+             {
                withSonarQubeEnv(installationName: 'sonarqubeserver', credentialsId: 'sonarqube') 
                {
                 sh 'mvn clean package sonar:sonar -Dsonar.projectName="java-pipeline" -Dsonar.projectKey="java"'
                 }
-            
+            }
         }
 
 
