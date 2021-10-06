@@ -5,53 +5,41 @@ pipeline {
        maven "M3"
     }
       stage('checkout') {
-          
+          steps{
 
                 git branch: 'main', url: 'https://github.com/prakash189/hello-java.git'
 
           }
+      }
         
 
          stage('build code') {
-            
+            steps{
 
                 sh 'mvn clean install'
           
-        }
+           }
+         }
 
 
        stage ('Scan File') {
-            
-               withSonarQubeEnv(installationName: 'sonarqubeserver', credentialsId: 'sonarqube') 
-               {
-                sh 'mvn clean package sonar:sonar -Dsonar.projectName="java-pipeline" -Dsonar.projectKey="java"'
+            steps{
+                    withSonarQubeEnv(installationName: 'sonarqubeserver', credentialsId: 'sonarqube') 
+                    {
+                    sh 'mvn clean package sonar:sonar -Dsonar.projectName="java-pipeline" -Dsonar.projectKey="java"'
                 }
             
-        }
+           }
+       }
 
 
-        stage("Check for Quality Gate")
-               {
-               
-                       timeout(time: 1, unit: 'MINUTES') 
-                            {
-                                   def qg = waitForQualityGate()
-                                    if (qg.status != 'OK') 
-                                    { 
-                                        error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                                    }
-                            }
-               
-                  
-               }
-
-          //  stage('SQuality Gate') {
-          //       steps {
-          //           timeout(time: 5, unit: 'MINUTES') {
-          //            waitForQualityGate abortPipeline: true
-          //          }
-          //       }
-          //  }
+           stage('SQuality Gate') {
+                steps {
+                    timeout(time: 5, unit: 'MINUTES') {
+                     waitForQualityGate abortPipeline: true
+                   }
+                }
+           }
 
         //      stage('upload the artifacts on nexus') {
         //           steps {
