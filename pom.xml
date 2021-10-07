@@ -61,16 +61,16 @@
                 </configuration>
             </plugin>
 
-            <!-- <plugin>
+            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.6</version>
-            </plugin> -->
+            </plugin>
 
         </plugins>
     </build>
 
-<!--     
+    
   <profiles>
     <profile>
       <id>coverage</id>
@@ -94,7 +94,7 @@
         </plugins>
       </build>
     </profile>
-  </profiles>   -->
+  </profiles>  
 
     <repositories>
         <repository>
