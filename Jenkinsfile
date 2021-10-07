@@ -60,7 +60,7 @@ pipeline {
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
                     repository: 'java-apps-artifacts/', 
-                    version: "1"
+                    version: "2"
           }
         }
 
