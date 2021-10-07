@@ -50,7 +50,7 @@ pipeline {
                   [
                     artifactId: 'LoginWebApp', 
                     classifier: '', 
-                    file: "target/LoginWebApp-1.war", 
+                    file: "target/LoginWebApp-2.war", 
                     type: 'war'
                   ]
 
@@ -60,7 +60,7 @@ pipeline {
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
                     repository: 'java-apps-artifacts/', 
-                    version: "1"
+                    version: "2"
           }
         }
 
