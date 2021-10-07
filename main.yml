@@ -97,13 +97,13 @@
       repository_url:     "http://18.139.170.236:8081/repository/java-apps-artifacts/"
       group_id:           "com.devops4solutions"
       artifact_id:        "LoginWebApp"
-      version:            "1"
+      version:            "2"
       extension:          "war"
       dest:               "/opt/tomcat/webapps"
 
   - name: Change ownership
     file:
-      path: /opt/tomcat/webapps/LoginWebApp-1.war
+      path: /opt/tomcat/webapps/LoginWebApp-2.war
       owner: tomcat
       group: tomcat
       mode: "u+rwx,g+rx,o=rx"
