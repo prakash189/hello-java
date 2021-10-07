@@ -97,7 +97,7 @@
       repository_url:     "http://18.138.191.148:8081/repository/java-apps-artifacts/"
       group_id:           "com.devops4solutions"
       artifact_id:        "LoginWebApp"
-      version:            "2"
+      version:            "1"
       extension:          "war"
       dest:               "/opt/tomcat/webapps"
 
