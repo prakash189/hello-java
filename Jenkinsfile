@@ -50,7 +50,7 @@ pipeline {
                   [
                     artifactId: 'LoginWebApp', 
                     classifier: '', 
-                    file: "target/LoginWebApp-1.war", 
+                    file: "target/LoginWebApp-2.war", 
                     type: 'war'
                   ]
 
