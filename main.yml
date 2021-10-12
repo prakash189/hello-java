@@ -1,5 +1,5 @@
 ---
-- hosts: - hosts: tag_Name_terraform_webserver1
+- hosts: tag_Name_terraform_webserver1
   gather_facts: false
 
   # become: yes
