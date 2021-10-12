@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: tag_Name_terraform-webserver1
 
   become: yes
   become_method: sudo
@@ -54,21 +54,21 @@
       state: directory
       mode: 0755
 
-  # - name: download & unarchive
-  #   unarchive:
-  #     src: http://apache.cs.utah.edu/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz
-  #     dest: /opt/tomcat
-  #     remote_src: yes
-  #     extra_opts: [--strip-components=1]
+  - name: download & unarchive
+    unarchive:
+      src: http://apache.cs.utah.edu/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz
+      dest: /opt/tomcat
+      remote_src: yes
+      extra_opts: [--strip-components=1]
 
-  # - name: Change ownership
-  #   file:
-  #     path: /opt/tomcat
-  #     owner: tomcat
-  #     group: tomcat
-  #     mode: "u+rwx,g+rx,o=rx"
-  #     recurse: yes
-  #     state: directory
+  - name: Change ownership
+    file:
+      path: /opt/tomcat
+      owner: tomcat
+      group: tomcat
+      mode: "u+rwx,g+rx,o=rx"
+      recurse: yes
+      state: directory
 
   - name: Copy Tomcat service from local to remote
     copy:
@@ -97,13 +97,13 @@
       repository_url:     "http://18.138.191.148:8081/repository/java-apps-artifacts/"
       group_id:           "com.devops4solutions"
       artifact_id:        "LoginWebApp"
-      version:            "2"
+      version:            "3"
       extension:          "war"
       dest:               "/opt/tomcat/webapps"
 
   - name: Change ownership
     file:
-      path: /opt/tomcat/webapps/LoginWebApp-2.war
+      path: /opt/tomcat/webapps/LoginWebApp-3.war
       owner: tomcat
       group: tomcat
       mode: "u+rwx,g+rx,o=rx"
