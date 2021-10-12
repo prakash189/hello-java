@@ -15,13 +15,13 @@ pipeline {
       }
         
 
-         stage('build code') {
-            steps{
+        //  stage('build code') {
+        //     steps{
 
-                sh 'mvn clean install'
+        //         sh 'mvn clean install'
           
-           }
-         }
+        //    }
+        //  }
 
 
       //  stage ('Scan File') {
