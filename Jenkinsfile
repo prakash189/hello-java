@@ -69,7 +69,7 @@ pipeline {
 
             steps {
                 
-                sh "ansible-playbook main.yml -i inventories/prod/hosts
+                sh "ansible-playbook -i hosts main.yml"
         
             
             }
