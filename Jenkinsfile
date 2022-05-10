@@ -69,7 +69,7 @@ pipeline {
 
             steps {
                 
-                sh "ansible-playbook main.yml --user ubuntu  --private-key /home/ubuntu/id_rsa "
+                sh "ansible-playbook main.yml -i 
         
             
             }
