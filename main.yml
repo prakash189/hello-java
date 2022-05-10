@@ -37,16 +37,16 @@
     pip:
       name: lxml 
 
-  - name: add tomcat group
-    group:
-      name: tomcat
+  #- name: add tomcat group
+  #  group:
+  #    name: tomcat
 
-  - name: add tomcat user
-    user:
-      name: tomcat
-      group: tomcat
-      home: /user/share/tomcat
-      createhome: no
+  #- name: add tomcat user
+  #  user:
+  #    name: tomcat
+   #   group: tomcat
+   #   home: /user/share/tomcat
+   #   createhome: no
 
   - name: create /opt/tomcat directory
     file:
