@@ -1,5 +1,5 @@
 ---
-- hosts: tag_Name_terraform_webserver1
+- hosts: all
   gather_facts: false
   become: yes
   become_method: sudo
@@ -92,21 +92,21 @@
     
 # Deploy artifacts from nexus server to the client machine
 
-  - name:                 Download artifact from nexus server
-    maven_artifact:
-      repository_url:     "http://18.138.191.148:8081/repository/java-apps-artifacts/"
-      group_id:           "com.devops4solutions"
-      artifact_id:        "LoginWebApp"
-      version:            "3"
-      extension:          "war"
-      dest:               "/opt/tomcat/webapps"
+#  - name:                 Download artifact from nexus server
+#    maven_artifact:
+#      repository_url:     "http://18.138.191.148:8081/repository/java-apps-artifacts/"
+#      group_id:           "com.devops4solutions"
+#      artifact_id:        "LoginWebApp"
+#      version:            "3"
+#      extension:          "war"
+#      dest:               "/opt/tomcat/webapps"
 
-  - name: Change ownership
-    file:
-      path: /opt/tomcat/webapps/LoginWebApp-3.war
-      owner: tomcat
-      group: tomcat
-      mode: "u+rwx,g+rx,o=rx"
+ # - name: Change ownership
+ #   file:
+ #     path: /opt/tomcat/webapps/LoginWebApp-3.war
+ #     owner: tomcat
+ #     group: tomcat
+ #     mode: "u+rwx,g+rx,o=rx"
 
 
   - name: Start and enable Tomcat service
